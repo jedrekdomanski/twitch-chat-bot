@@ -1,2 +1,4 @@
 twitch:
   username: 0jedrek0
+  server: irc.chat.twitch.tv
+  port: 6667

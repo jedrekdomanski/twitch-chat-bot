@@ -5,7 +5,6 @@ module ChatBot
   class Twitch < Channel
 
     TWITCH_CHAT_TOKEN = ENV['TWITCH_CHAT_TOKEN']
-    TWITCH_USER = ENV['TWITCH_USER']
 
     attr_reader :socket
 
@@ -45,10 +44,12 @@ module ChatBot
 
     def initialize_channel
       username = ChatBot.config.settings['twitch']['username']
+      server   = ChatBot.config.settings['twitch']['server']
+      port     = ChatBot.config.settings['twitch']['port']
 
       logger.info "Preparing to connect to Twitch as #{username}..."
 
-      @socket = TCPSocket.new('irc.chat.twitch.tv', 6667)
+      @socket = TCPSocket.new(server, port)
       socket.puts("PASS #{TWITCH_CHAT_TOKEN}")
       socket.puts("NICK #{username}")
 
